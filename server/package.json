@@ -1,0 +1,20 @@
+{
+  "name": "lms-server",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ysdhuri312/learning-management-system-v1#readme",
+  "bugs": {
+    "url": "https://github.com/ysdhuri312/learning-management-system-v1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysdhuri312/learning-management-system-v1.git"
+  },
+  "license": "ISC",
+  "author": "Yogesh Dhuri",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
