@@ -1,6 +1,10 @@
 /** @format */
 
 import app from './app.js';
+import { disconnectDB, connectDB } from './configs/db.js';
+
+// Connect to database
+await connectDB();
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'localhost';
@@ -10,7 +14,6 @@ const server = app.listen(PORT, () => {
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`Press Ctrl+C to stop`);
 });
-
 // handle promise rejections
 process.on('unhandledRejection', (error) => {
   console.error('Unhadled Rejection: ', error);

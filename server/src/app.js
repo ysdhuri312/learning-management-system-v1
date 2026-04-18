@@ -1,6 +1,10 @@
 /** @format */
 
 import express from 'express';
+import 'dotenv/config';
+
+import userRouter from './routers/user.router.js';
+
 const app = express();
 
 app.use(express.json());
@@ -13,6 +17,9 @@ app.get('/', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+//Routes
+app.use('/api/user', userRouter);
 
 // Health Route
 app.get('/health', (req, res) => {
