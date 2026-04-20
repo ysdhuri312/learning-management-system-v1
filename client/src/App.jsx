@@ -1,7 +1,9 @@
 /** @format */
 
 import { Route, Routes, useMatch } from 'react-router';
+
 import Home from './pages/student/Home';
+import Navbar from './components/student/Navbar';
 
 function App() {
   const isEducatorRoute = useMatch('/educator/*');
