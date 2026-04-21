@@ -1,6 +1,6 @@
 /** @format */
 
-import User from '../model/user.model.js';
+import User from '../models/user.model.js';
 
 // Get User Data
 export const getUserData = async (req, res) => {
