@@ -1,5 +1,6 @@
 /** @format */
 
+import mongoose from 'mongoose';
 import Course from '../models/course.model.js';
 
 // Get All Courses
@@ -20,8 +21,10 @@ export const getCourseId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const courseData = await Course.findById(id).populate({ path: 'educator' });
-
+    const courseData = await Course.findById(id).populate({
+      path: 'educator',
+    });
+    // codered
     // Remove lectureUrl if isPreviewFree is false
     courseData.courseContent.forEach((chapter) => {
       chapter.chapterContent.forEach((lecture) => {
@@ -33,6 +36,6 @@ export const getCourseId = async (req, res) => {
 
     res.json({ success: true, courseData });
   } catch (error) {
-    res.json({ success: false, message: error.message });
+    res.status(404).json({ success: false, message: error.message });
   }
 };
