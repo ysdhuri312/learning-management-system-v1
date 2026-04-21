@@ -5,7 +5,9 @@ import 'dotenv/config';
 import { clerkMiddleware } from '@clerk/express';
 import cors from 'cors';
 
-import userRouter from './routers/user.router.js';
+import userRouter from './routers/user.routes.js';
+import courseRouter from './routers/course.routes.js';
+
 import { clerkWebhooks } from './controllers/webhooks.js';
 
 const app = express();
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
 //Routes
 app.post('/api/v1/clerk', clerkWebhooks);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/course', courseRouter);
 
 // Health Route
 app.get('/health', (req, res) => {
