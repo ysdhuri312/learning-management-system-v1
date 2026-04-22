@@ -29,7 +29,11 @@ app.get('/', (req, res) => {
 
 //Routes
 app.post('/api/v1/clerk', clerkWebhooks);
-app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks);
+app.post(
+  '/api/v1/stripe',
+  express.raw({ type: 'application/json' }),
+  stripeWebhooks,
+);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/course', courseRouter);
 app.use('/api/v1/educator', educatorRouter);

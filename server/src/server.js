@@ -1,10 +1,12 @@
 /** @format */
 
 import app from './app.js';
+import connectCloudinary from './configs/cloudinary.js';
 import { disconnectDB, connectDB } from './configs/db.js';
 
 // Connect to database
 await connectDB();
+await connectCloudinary();
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'localhost';
