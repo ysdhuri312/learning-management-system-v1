@@ -1,11 +1,19 @@
 /** @format */
 
 import express from 'express';
-import { updateRoleToEducator } from '../controllers/educator.controller';
+import {
+  addCourse,
+  updateRoleToEducator,
+} from '../controllers/educator.controller.js';
+import upload from '../configs/multer.js';
+import { protectEducator } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
 // Add Educator Role
-educatorRouter.get('/update-role', updateRoleToEducator);
+router.get('/update-role', updateRoleToEducator);
+
+// Add Courses
+router.post('/add-course', upload.single('image'), protectEducator, addCourse);
 
 export default router;
