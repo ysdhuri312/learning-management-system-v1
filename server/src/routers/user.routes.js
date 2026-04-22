@@ -3,6 +3,7 @@
 import express from 'express';
 
 import {
+  addUserRating,
   getUserCourseProgress,
   getUserData,
   purchaseCourse,
@@ -16,5 +17,6 @@ router.post('/purchase', purchaseCourse);
 router.get('/enrolled-courses', userEnrolledCourses);
 router.post('/update-course-progress', updateUserCourseProgress);
 router.post('/get-course-progress', getUserCourseProgress);
+router.post('/add-rating', addUserRating);
 
 export default router;
