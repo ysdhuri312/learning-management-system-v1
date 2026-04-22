@@ -4,6 +4,7 @@ import { Webhook } from 'svix';
 import User from '../models/user.model.js';
 import stripe from 'stripe';
 import Course from '../models/course.model.js';
+import Purchase from '../models/purchase.model.js';
 
 // API Controller Function to Manage Clerk User with database
 export const clerkWebhooks = async (req, res) => {

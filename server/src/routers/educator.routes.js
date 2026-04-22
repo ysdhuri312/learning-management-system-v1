@@ -3,6 +3,7 @@
 import express from 'express';
 import {
   addCourse,
+  educatorDashboardData,
   getEducatorCourses,
   updateRoleToEducator,
 } from '../controllers/educator.controller.js';
@@ -19,5 +20,8 @@ router.post('/add-course', upload.single('image'), protectEducator, addCourse);
 
 // Get Educator Courses
 router.get('/courses', protectEducator, getEducatorCourses);
+
+// Get Educator Dashboard Data
+router.get('/dashboard', protectEducator, educatorDashboardData);
 
 export default router;
