@@ -5,6 +5,7 @@ import {
   addCourse,
   educatorDashboardData,
   getEducatorCourses,
+  getEnrolledStudentsData,
   updateRoleToEducator,
 } from '../controllers/educator.controller.js';
 import upload from '../configs/multer.js';
@@ -23,5 +24,8 @@ router.get('/courses', protectEducator, getEducatorCourses);
 
 // Get Educator Dashboard Data
 router.get('/dashboard', protectEducator, educatorDashboardData);
+
+// Get Educator Students Data
+router.get('/enrolled-students', protectEducator, getEnrolledStudentsData);
 
 export default router;
