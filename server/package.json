@@ -24,6 +24,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.4.1",
+    "stripe": "^22.0.2",
     "svix": "^1.90.0"
   },
   "devDependencies": {

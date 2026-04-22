@@ -7,6 +7,7 @@ import {
   getUserCourseProgress,
   getUserData,
   purchaseCourse,
+  updateUserCourseProgress,
   userEnrolledCourses,
 } from '../controllers/user.controller.js';
 
