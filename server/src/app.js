@@ -7,8 +7,9 @@ import cors from 'cors';
 
 import userRouter from './routers/user.routes.js';
 import courseRouter from './routers/course.routes.js';
+import educatorRouter from './routers/educator.routes.js';
 
-import { clerkWebhooks } from './controllers/webhooks.js';
+import { clerkWebhooks, stripeWebhooks } from './controllers/webhooks.js';
 
 const app = express();
 
@@ -28,8 +29,10 @@ app.get('/', (req, res) => {
 
 //Routes
 app.post('/api/v1/clerk', clerkWebhooks);
+app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/course', courseRouter);
+app.use('/api/v1/educator', educatorRouter);
 
 // Health Route
 app.get('/health', (req, res) => {
