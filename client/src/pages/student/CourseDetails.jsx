@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Footer from '../../components/student/Footer';
 import { assets } from '../../assets/assets';
 import { useParams } from 'react-router';
@@ -32,7 +32,7 @@ const CourseDetails = () => {
 
   const fetchCourseData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + '/api/course/' + id);
+      const { data } = await axios.get(backendUrl + '/api/v1/course/' + id);
 
       if (data.success) {
         setCourseData(data.courseData);
@@ -66,7 +66,7 @@ const CourseDetails = () => {
       const token = await getToken();
 
       const { data } = await axios.post(
-        backendUrl + '/api/user/purchase',
+        backendUrl + '/api/v1/user/purchase',
         { courseId: courseData._id },
         { headers: { Authorization: `Bearer ${token}` } },
       );
