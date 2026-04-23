@@ -3,13 +3,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Footer from '../../components/student/Footer';
 import { assets } from '../../assets/assets';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import axios from 'axios';
 import { AppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
 import humanizeDuration from 'humanize-duration';
 import YouTube from 'react-youtube';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth } from '@clerk/react';
 import Loading from '../../components/student/Loading';
 
 const CourseDetails = () => {
