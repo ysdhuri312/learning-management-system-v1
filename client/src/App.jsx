@@ -11,6 +11,7 @@ import CourseDetails from './pages/student/CourseDetails';
 import CoursesList from './pages/student/CoursesList';
 import MyEnrollments from './pages/student/MyEnrollments';
 import Loading from './components/student/Loading';
+import Player from './pages/student/Player';
 
 function App() {
   const isEducatorRoute = useMatch('/educator/*');
@@ -26,6 +27,7 @@ function App() {
         <Route path='/course-list' element={<CoursesList />} />
         <Route path='/course-list/:input' element={<CoursesList />} />
         <Route path='/my-enrollments' element={<MyEnrollments />} />
+        <Route path='/player/:courseId' element={<Player />} />
         <Route path='/loading/:path' element={<Loading />} />
       </Routes>
     </div>
