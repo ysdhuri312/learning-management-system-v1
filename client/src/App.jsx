@@ -12,6 +12,7 @@ import CoursesList from './pages/student/CoursesList';
 import MyEnrollments from './pages/student/MyEnrollments';
 import Loading from './components/student/Loading';
 import Player from './pages/student/Player';
+import Educator from './pages/educator/Educator';
 
 function App() {
   const isEducatorRoute = useMatch('/educator/*');
@@ -29,6 +30,7 @@ function App() {
         <Route path='/my-enrollments' element={<MyEnrollments />} />
         <Route path='/player/:courseId' element={<Player />} />
         <Route path='/loading/:path' element={<Loading />} />
+        <Route path='/educator' element={<Educator />}></Route>
       </Routes>
     </div>
   );
