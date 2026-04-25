@@ -14,6 +14,7 @@ import Loading from './components/student/Loading';
 import Player from './pages/student/Player';
 import Educator from './pages/educator/Educator';
 import Dashboard from './pages/educator/Dashboard';
+import AddCourse from './pages/educator/AddCourse';
 
 function App() {
   const isEducatorRoute = useMatch('/educator/*');
@@ -33,6 +34,7 @@ function App() {
         <Route path='/loading/:path' element={<Loading />} />
         <Route path='/educator' element={<Educator />}>
           <Route path='/educator' element={<Dashboard />} />
+          <Route path='add-course' element={<AddCourse />} />
         </Route>
       </Routes>
     </div>
