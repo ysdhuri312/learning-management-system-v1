@@ -16,6 +16,7 @@ import Educator from './pages/educator/Educator';
 import Dashboard from './pages/educator/Dashboard';
 import AddCourse from './pages/educator/AddCourse';
 import MyCourses from './pages/educator/MyCourses';
+import StudentsEnrolled from './pages/educator/StudentsEnrolled';
 
 function App() {
   const isEducatorRoute = useMatch('/educator/*');
@@ -37,6 +38,7 @@ function App() {
           <Route path='/educator' element={<Dashboard />} />
           <Route path='add-course' element={<AddCourse />} />
           <Route path='my-courses' element={<MyCourses />} />
+          <Route path='student-enrolled' element={<StudentsEnrolled />} />
         </Route>
       </Routes>
     </div>
