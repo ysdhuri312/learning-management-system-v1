@@ -1,5 +1,6 @@
 /** @format */
 
+import 'dotenv/config';
 import app from './app.js';
 import connectCloudinary from './configs/cloudinary.js';
 import { disconnectDB, connectDB } from './configs/db.js';
