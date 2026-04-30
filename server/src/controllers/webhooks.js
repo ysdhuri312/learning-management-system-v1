@@ -16,18 +16,17 @@ export const clerkWebhooks = async (req, res) => {
     console.log(whook);
 
     // Verifying Headers
-    await whook.verify(req.body, {
+    const payload = await whook.verify(req.body, {
       'svix-id': req.headers['svix-id'],
       'svix-timestamp': req.headers['svix-timestamp'],
       'svix-signature': req.headers['svix-signature'],
     });
 
     console.log('✅ Webhook verified');
-
+    console.log(payload);
     // Getting Data from request body
     const { data, type } = req.body;
 
-    console.log('data:', data, 'type:', type, 'body :', req.body);
     // Switch Cases for differernt Events
     switch (type) {
       case 'user.created': {
