@@ -36,9 +36,14 @@ export const clerkWebhooks = async (req, res) => {
           name: data.first_name + ' ' + data.last_name,
           imageUrl: data.image_url,
         };
-        await User.create(userData);
-        res.json({});
-        break;
+        try {
+          await User.create(userData);
+          console.log('✅ User saved');
+          res.json({});
+          break;
+        } catch (error) {
+          console.error('❌ DB ERROR:', error);
+        }
       }
 
       case 'user.updated': {
