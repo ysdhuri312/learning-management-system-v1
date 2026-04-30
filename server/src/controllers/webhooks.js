@@ -5,10 +5,13 @@ import User from '../models/user.model.js';
 import stripe from 'stripe';
 import Course from '../models/course.model.js';
 import Purchase from '../models/purchase.model.js';
+import { connectDB } from '../configs/db.js';
 
 // API Controller Function to Manage Clerk User with database
 export const clerkWebhooks = async (req, res) => {
   try {
+    await connectDB();
+
     // Create a Svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
