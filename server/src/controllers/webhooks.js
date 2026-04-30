@@ -16,11 +16,13 @@ export const clerkWebhooks = async (req, res) => {
     console.log(whook);
 
     // Verifying Headers
-    await whook.verify(JSON.stringify(req.body), {
+    await whook.verify(req.body, {
       'svix-id': req.headers['svix-id'],
       'svix-timestamp': req.headers['svix-timestamp'],
       'svix-signature': req.headers['svix-signature'],
     });
+
+    console.log('✅ Webhook verified');
 
     // Getting Data from request body
     const { data, type } = req.body;

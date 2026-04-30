@@ -14,7 +14,6 @@ import { clerkWebhooks, stripeWebhooks } from './controllers/webhooks.js';
 const app = express();
 
 // Middlewares
-app.use(express.json());
 app.use(clerkMiddleware());
 app.use(cors());
 
@@ -28,15 +27,19 @@ app.get('/', (req, res) => {
 });
 
 //Routes
-app.post('/api/v1/clerk', clerkWebhooks);
+app.post(
+  '/api/v1/clerk',
+  express.raw({ type: 'application/json' }),
+  clerkWebhooks,
+);
 app.post(
   '/api/v1/stripe',
   express.raw({ type: 'application/json' }),
   stripeWebhooks,
 );
-app.use('/api/v1/user', userRouter);
-app.use('/api/v1/course', courseRouter);
-app.use('/api/v1/educator', educatorRouter);
+app.use('/api/v1/user', express.json(), userRouter);
+app.use('/api/v1/course', express.json(), courseRouter);
+app.use('/api/v1/educator', express.json(), educatorRouter);
 
 // Health Route
 app.get('/health', (req, res) => {
