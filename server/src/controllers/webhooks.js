@@ -9,8 +9,11 @@ import Purchase from '../models/purchase.model.js';
 // API Controller Function to Manage Clerk User with database
 export const clerkWebhooks = async (req, res) => {
   try {
+    console.log(process.env.CLERK_WEBHOOK_SECRET);
     // Create a Svix instance with clerk webhook secret.
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+
+    console.log(whook);
 
     // Verifying Headers
     await whook.verify(JSON.stringify(req.body), {
@@ -22,6 +25,7 @@ export const clerkWebhooks = async (req, res) => {
     // Getting Data from request body
     const { data, type } = req.body;
 
+    console.log('data:', data, 'type:', type);
     // Switch Cases for differernt Events
     switch (type) {
       case 'user.created': {
