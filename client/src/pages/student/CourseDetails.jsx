@@ -34,6 +34,8 @@ const CourseDetails = () => {
     try {
       const { data } = await axios.get(backendUrl + '/api/v1/course/' + id);
 
+      console.log(data);
+
       if (data.success) {
         setCourseData(data.courseData);
       } else {

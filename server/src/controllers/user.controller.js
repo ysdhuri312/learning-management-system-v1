@@ -8,6 +8,8 @@ export const getUserData = async (req, res) => {
   try {
     const userId = req.auth.userId;
 
+    console.log(userId);
+
     const user = await User.findById(userId);
 
     if (!user) {
