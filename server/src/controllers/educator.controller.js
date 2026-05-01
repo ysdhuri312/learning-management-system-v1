@@ -43,6 +43,9 @@ export const addCourse = async (req, res) => {
 
     const imageUpload = await cloudinary.uploader.upload(imageFile.path);
 
+    console.log('FILE:', imageFile); //REMOVE
+    console.log('PATH:', imageFile?.path); //REMOVE
+
     newCourse.courseThumbnail = imageUpload.secure_url;
 
     await newCourse.save();
