@@ -1,5 +1,6 @@
 /** @format */
 
+import { clerkClient } from '@clerk/express';
 import { connectDB } from '../configs/db.js';
 import { CourseProgress } from '../models/courseProgress.model.js';
 import User from '../models/user.model.js';
@@ -7,15 +8,22 @@ import User from '../models/user.model.js';
 // Get User Data
 export const getUserData = async (req, res) => {
   try {
-    await connectDB();
     const userId = req.auth.userId;
-
-    console.log(userId);
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.json({ success: false, message: 'User Not Found' });
+      // create user from Clerk data
+      const clerkUser = await clerkClient.users.getUser(userId);
+
+      user = await User.create({
+        _id: userId,
+        email: clerkUser.emailAddresses[0].emailAddress,
+        name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`,
+        imageUrl: clerkUser.imageUrl || '',
+      });
+
+      console.log('⚡ User auto-created from API');
     }
 
     res.json({ success: true, user });

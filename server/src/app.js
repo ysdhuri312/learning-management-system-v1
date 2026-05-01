@@ -30,11 +30,13 @@ app.get('/', (req, res) => {
 //Routes
 app.post(
   '/api/v1/clerk',
+  ensureDB,
   express.raw({ type: 'application/json' }),
   clerkWebhooks,
 );
 app.post(
   '/api/v1/stripe',
+  ensureDB,
   express.raw({ type: 'application/json' }),
   stripeWebhooks,
 );
