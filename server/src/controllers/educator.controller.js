@@ -40,6 +40,10 @@ export const addCourse = async (req, res) => {
 
     const imageUpload = await uploadFromBuffer(imageFile.buffer);
 
+    console.log('FILE:', imageFile); //codered
+    console.log('PATH:', imageFile?.path); //codered
+    console.log('BUFFER:', imageFile?.buffer); //codered
+
     const newCourse = await Course.create({
       ...parsedCourseData,
       courseThumbnail: imageUpload.secure_url,
