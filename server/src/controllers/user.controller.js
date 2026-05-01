@@ -1,5 +1,6 @@
 /** @format */
 
+import { connectDB } from '../configs/db.js';
 import { CourseProgress } from '../models/courseProgress.model.js';
 import User from '../models/user.model.js';
 
