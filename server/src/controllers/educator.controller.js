@@ -4,6 +4,7 @@ import { clerkClient } from '@clerk/express';
 import { v2 as cloudinary } from 'cloudinary';
 import Course from '../models/course.model.js';
 import Purchase from '../models/purchase.model.js';
+import { uploadFromBuffer } from '../utils/imageUploader.js';
 
 // update role to educator
 export const updateRoleToEducator = async (req, res) => {
@@ -28,27 +29,21 @@ export const addCourse = async (req, res) => {
     const { courseData } = req.body;
 
     const imageFile = req.file;
-
     const educatorId = req.auth.userId;
 
-    if (!imageFile) {
-      return res.json({ success: false, message: 'Thumbnail Not Attached' });
+    if (!imageFile || !imageFile.buffer) {
+      return res.json({ success: false, message: 'Invalid image file' });
     }
 
     const parsedCourseData = await JSON.parse(courseData);
-
     parsedCourseData.educator = educatorId;
 
-    const newCourse = await Course.create(parsedCourseData);
+    const imageUpload = await uploadFromBuffer(imageFile.buffer);
 
-    const imageUpload = await cloudinary.uploader.upload(imageFile.path);
-
-    console.log('FILE:', imageFile); //REMOVE
-    console.log('PATH:', imageFile?.path); //REMOVE
-
-    newCourse.courseThumbnail = imageUpload.secure_url;
-
-    await newCourse.save();
+    const newCourse = await Course.create({
+      ...parsedCourseData,
+      courseThumbnail: imageUpload.secure_url,
+    });
 
     res.json({ success: true, message: 'Course Added' });
   } catch (error) {
