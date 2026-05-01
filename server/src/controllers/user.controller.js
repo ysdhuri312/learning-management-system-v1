@@ -6,6 +6,7 @@ import User from '../models/user.model.js';
 // Get User Data
 export const getUserData = async (req, res) => {
   try {
+    await connectDB();
     const userId = req.auth.userId;
 
     console.log(userId);
