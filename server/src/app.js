@@ -10,6 +10,7 @@ import courseRouter from './routers/course.routes.js';
 import educatorRouter from './routers/educator.routes.js';
 
 import { clerkWebhooks, stripeWebhooks } from './controllers/webhooks.js';
+import { ensureDB } from './middlewares/db.middleware.js';
 
 const app = express();
 
@@ -37,9 +38,9 @@ app.post(
   express.raw({ type: 'application/json' }),
   stripeWebhooks,
 );
-app.use('/api/v1/user', express.json(), userRouter);
-app.use('/api/v1/course', express.json(), courseRouter);
-app.use('/api/v1/educator', express.json(), educatorRouter);
+app.use('/api/v1/user', ensureDB, express.json(), userRouter);
+app.use('/api/v1/course', ensureDB, express.json(), courseRouter);
+app.use('/api/v1/educator', ensureDB, express.json(), educatorRouter);
 
 // Health Route
 app.get('/health', (req, res) => {
