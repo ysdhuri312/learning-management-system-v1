@@ -9,6 +9,8 @@ import User from '../models/user.model.js';
 export const getUserData = async (req, res) => {
   try {
     const { userId } = getAuth(req);
+
+    console.log(userId);
     if (!userId) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
