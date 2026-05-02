@@ -40,7 +40,7 @@ app.post(
   express.raw({ type: 'application/json' }),
   stripeWebhooks,
 );
-app.use('/api/v1/user', requireAuth(), ensureDB, express.json(), userRouter);
+app.use('/api/v1/user', ensureDB, express.json(), userRouter);
 app.use('/api/v1/course', ensureDB, express.json(), courseRouter);
 app.use('/api/v1/educator', ensureDB, express.json(), educatorRouter);
 

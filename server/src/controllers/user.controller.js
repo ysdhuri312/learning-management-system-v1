@@ -1,6 +1,6 @@
 /** @format */
 
-import { clerkClient } from '@clerk/express';
+import { clerkClient, getAuth } from '@clerk/express';
 import { connectDB } from '../configs/db.js';
 import { CourseProgress } from '../models/courseProgress.model.js';
 import User from '../models/user.model.js';
@@ -8,8 +8,10 @@ import User from '../models/user.model.js';
 // Get User Data
 export const getUserData = async (req, res) => {
   try {
-    const userId = req.auth.userId;
-    console.log(userId);
+    const { userId } = getAuth(req);
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
 
     const user = await User.findById(userId);
 
