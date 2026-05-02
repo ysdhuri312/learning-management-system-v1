@@ -43,7 +43,7 @@ export const purchaseCourse = async (req, res) => {
     const { courseId } = req.body;
     const { origin } = req.headers;
 
-    const userId = req.auth.userId;
+    const userId = getAuth(req);
 
     const courseData = await Course.findById(courseId);
     const userData = await User.findById(userId);
@@ -101,7 +101,7 @@ export const purchaseCourse = async (req, res) => {
 // Users Enrolled Courses With Lecture Links
 export const userEnrolledCourses = async (req, res) => {
   try {
-    const userId = req.auth.userId;
+    const userId = getAuth(req);
 
     const userData = await User.findById(userId).populate('enrolledCourses');
 
@@ -114,7 +114,7 @@ export const userEnrolledCourses = async (req, res) => {
 // Update User Course Progress
 export const updateUserCourseProgress = async (req, res) => {
   try {
-    const userId = req.auth.userId;
+    const userId = getAuth(req);
 
     const { courseId, lectureId } = req.body;
 
@@ -147,7 +147,7 @@ export const updateUserCourseProgress = async (req, res) => {
 // get User Course Progress
 export const getUserCourseProgress = async (req, res) => {
   try {
-    const userId = req.auth.userId;
+    const userId = getAuth(req);
 
     const { courseId } = req.body;
 
@@ -161,7 +161,7 @@ export const getUserCourseProgress = async (req, res) => {
 
 // Add User Ratings to Course
 export const addUserRating = async (req, res) => {
-  const userId = req.auth.userId;
+  const userId = getAuth(req);
   const { courseId, rating } = req.body;
 
   // Validate inputs

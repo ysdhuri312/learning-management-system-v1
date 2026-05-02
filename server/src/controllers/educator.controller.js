@@ -1,6 +1,6 @@
 /** @format */
 
-import { clerkClient } from '@clerk/express';
+import { clerkClient, getAuth } from '@clerk/express';
 import { v2 as cloudinary } from 'cloudinary';
 import Course from '../models/course.model.js';
 import Purchase from '../models/purchase.model.js';
@@ -9,7 +9,7 @@ import { uploadFromBuffer } from '../utils/imageUploader.js';
 // update role to educator
 export const updateRoleToEducator = async (req, res) => {
   try {
-    const userId = req.auth.userId;
+    const userId = getAuth(req);
 
     await clerkClient.users.updateUserMetadata(userId, {
       publicMetadata: {
@@ -29,7 +29,7 @@ export const addCourse = async (req, res) => {
     const { courseData } = req.body;
 
     const imageFile = req.file;
-    const educatorId = req.auth.userId;
+    const educatorId = getAuth(req);
 
     if (!imageFile || !imageFile.buffer) {
       return res.json({ success: false, message: 'Invalid image file' });
@@ -58,7 +58,7 @@ export const addCourse = async (req, res) => {
 // Get Educator Courses
 export const getEducatorCourses = async (req, res) => {
   try {
-    const educator = req.auth.userId;
+    const educator = getAuth(req);
 
     const courses = await Course.find({ educator });
 
@@ -71,7 +71,7 @@ export const getEducatorCourses = async (req, res) => {
 // Get Educator Dashboard Data ( Total Earning, Enrolled Students, No. of Courses)
 export const educatorDashboardData = async (req, res) => {
   try {
-    const educator = req.auth.userId;
+    const educator = getAuth(req);
 
     const courses = await Course.find({ educator });
 
@@ -124,7 +124,7 @@ export const educatorDashboardData = async (req, res) => {
 // Get Enrolled Students Data with Purchase Data
 export const getEnrolledStudentsData = async (req, res) => {
   try {
-    const educator = req.auth.userId;
+    const educator = getAuth(req);
 
     // Fetch all courses created by the educator
     const courses = await Course.find({ educator });
