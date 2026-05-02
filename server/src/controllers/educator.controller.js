@@ -5,6 +5,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import Course from '../models/course.model.js';
 import Purchase from '../models/purchase.model.js';
 import { uploadFromBuffer } from '../utils/imageUploader.js';
+import connectCloudinary from '../configs/cloudinary.js';
 
 // update role to educator
 export const updateRoleToEducator = async (req, res) => {
@@ -26,6 +27,8 @@ export const updateRoleToEducator = async (req, res) => {
 // Add New Course
 export const addCourse = async (req, res) => {
   try {
+    connectCloudinary();
+
     const { courseData } = req.body;
 
     const imageFile = req.file;
