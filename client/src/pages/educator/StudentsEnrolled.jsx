@@ -16,7 +16,7 @@ const StudentsEnrolled = () => {
       const token = await getToken();
 
       const { data } = await axios.get(
-        backendUrl + '/api/educator/enrolled-students',
+        backendUrl + '/api/v1/educator/enrolled-students',
         { headers: { Authorization: `Bearer ${token}` } },
       );
 

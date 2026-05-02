@@ -6,6 +6,7 @@ import Course from '../models/course.model.js';
 import Purchase from '../models/purchase.model.js';
 import { uploadFromBuffer } from '../utils/imageUploader.js';
 import connectCloudinary from '../configs/cloudinary.js';
+import User from '../models/user.model.js';
 
 // update role to educator
 export const updateRoleToEducator = async (req, res) => {
@@ -42,10 +43,6 @@ export const addCourse = async (req, res) => {
     parsedCourseData.educator = educatorId;
 
     const imageUpload = await uploadFromBuffer(imageFile.buffer);
-
-    console.log('FILE:', imageFile); //codered
-    console.log('PATH:', imageFile?.path); //codered
-    console.log('BUFFER:', imageFile?.buffer); //codered
 
     const newCourse = await Course.create({
       ...parsedCourseData,
