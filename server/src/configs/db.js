@@ -24,7 +24,6 @@ const connectDB = async () => {
 
     cached.conn = await cached.promise;
     console.log('✅ Database Connected:', cached.conn.connection.host);
-
     return cached.conn;
   } catch (error) {
     console.error('❌ Database connection failed:', error.message);
