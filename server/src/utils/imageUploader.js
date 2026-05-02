@@ -4,6 +4,10 @@ import streamifier from 'streamifier';
 import { v2 as cloudinary } from 'cloudinary';
 
 export const uploadFromBuffer = (buffer) => {
+  console.log(
+    process.env.CLOUDINARY_API_KEY,
+    process.env.CLOUDINARY_SECRET_KEY,
+  );
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { folder: 'courses' },
