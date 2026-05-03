@@ -67,6 +67,10 @@ const CourseDetails = () => {
 
       const token = await getToken();
 
+      if (!token) {
+        return toast.error('Authentication failed');
+      }
+
       const { data } = await axios.post(
         backendUrl + '/api/v1/user/purchase',
         { courseId: courseData._id },
