@@ -14,7 +14,7 @@ export const AppContextProvider = (props) => {
   const currency = import.meta.env.VITE_CURRENCY;
 
   const navigate = useNavigate();
-  const { getToken, isLoaded, isSignedIn } = useAuth();
+  const { getToken } = useAuth();
   const { user } = useUser();
 
   const [showLogin, setShowLogin] = useState(false);
@@ -61,28 +61,18 @@ export const AppContextProvider = (props) => {
 
   // Fetch User Enrolled Courses
   const fetchUserEnrolledCourses = async () => {
-    try {
-      const token = await getToken();
-      if (!token) return;
+    const token = await getToken();
+    if (!token) return;
 
-      const { data } = await axios.get(
-        backendUrl + '/api/v1/user/enrolled-courses',
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+    const { data } = await axios.get(
+      backendUrl + '/api/v1/user/enrolled-courses',
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
 
-      if (data.success) {
-        setEnrolledCourses(data.enrolledCourses.reverse());
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-
-      if (error.response?.status === 404) {
-        setEnrolledCourses([]); // ✅ no crash
-      } else {
-        toast.error('Failed to fetch enrollments');
-      }
+    if (data.success) {
+      setEnrolledCourses(data.enrolledCourses.reverse());
+    } else {
+      toast.error(data.message);
     }
   };
 
@@ -136,11 +126,11 @@ export const AppContextProvider = (props) => {
 
   // Fetch User's Data if User is Logged In
   useEffect(() => {
-    if (!isLoaded || !isSignedIn) return;
-
-    fetchUserData();
-    fetchUserEnrolledCourses();
-  }, [isLoaded, isSignedIn]);
+    if (user) {
+      fetchUserData();
+      fetchUserEnrolledCourses();
+    }
+  }, [user]);
 
   const value = {
     showLogin,
